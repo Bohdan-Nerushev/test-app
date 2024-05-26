@@ -3,145 +3,144 @@ import csv
 import pickle
 from pprint import pprint
 
+# Декоратор для виводу помилок
+def input_error(func):
+    def inner(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            return str(e)
 
+    return inner
+
+# Архівує список
+@input_error
 def add__member__word(word_dict: list = [], FILENAME: str = "word.csv"):
-    try:
-        with open(FILENAME, "w", encoding="utf-8", newline="") as f:
-            columns = word_dict[0].keys()
-            writer = csv.DictWriter(f, delimiter=",", fieldnames=columns)
-            writer.writeheader()
-            for row in word_dict:
-                writer.writerow(row)
-        return 'Дані збережено'
-    except Exception as e:
-        print('=======')
-        return e
+    with open(FILENAME, "w", encoding="utf-8", newline="") as f:
+        columns = word_dict[0].keys()
+        writer = csv.DictWriter(f, delimiter=",", fieldnames=columns)
+        writer.writeheader()
+        for row in word_dict:
+            writer.writerow(row)
+    return 'Дані збережено'
 
-
+# Розархівовує список
+@input_error
 def open_member_word(FILENAME="word.csv"):
-    try:
-        with open(FILENAME, "r", encoding="utf-8", newline="") as f:
-            reader = csv.DictReader(f)
-            a = []
-            for row in reader:
-                a.append(row)
-        return a
-    except Exception as e:
-        print('=======')
-        return e
+    with open(FILENAME, "r", encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+        a = []
+        for row in reader:
+            a.append(row)
+    return a
+    print('=======')
 
 
 # Додає слова в список
+@input_error
 def add_word(word_dict: list = []):
-    try:
-        new_word_d = input("Введіть нове слово німецькою: ").strip()
-        new_word_uk = input("Введіть переклад слова українською: ").strip()
-        word_dict.append({'d': new_word_d, 'uk': new_word_uk})
-        return add__member__word(word_dict)
-    except Exception as e:
-        print('=======')
-        return e
+    new_word_d = input("Введіть нове слово німецькою: ").strip()
+    new_word_uk = input("Введіть переклад слова українською: ").strip()
+    word_dict.append({'d': new_word_d, 'uk': new_word_uk})
+    return add__member__word(word_dict)
+    print('=======')
 
 
 # Оновлює слова у списку(укр.)
+@input_error
 def update_word_translet_uk(word_dict: list = []):
-    try:
-        alt_word_uk = input("Введіть старе слово українською: ").strip()
-        new_word_uk = input("Введіть оновлене слово українською: ").strip()
-        found = False
-        for i in word_dict:
-            if i.get('uk') == alt_word_uk:
-                i.update({'uk': new_word_uk})
-                found = True
-                break
-        if found:
-            add__member__word(word_dict)  # Зберігаємо оновлений словник у файл
-            return f'Переклад слова {alt_word_uk} оновлено на {new_word_uk}.'
-        else:
-            return f'Слово "{alt_word_uk}" не знайдено.'
-    except Exception as e:
-        print('=======')
-        return e
+    alt_word_uk = input("Введіть старе слово українською: ").strip()
+    new_word_uk = input("Введіть оновлене слово українською: ").strip()
+    found = False
+    for i in word_dict:
+        if i.get('Ukrain') == alt_word_uk:
+            i.update({'Ukrain': new_word_uk})
+            found = True
+            break
+    if found:
+        add__member__word(word_dict)  # Зберігаємо оновлений словник у файл
+        return f'Переклад слова {alt_word_uk} оновлено на {new_word_uk}.'
+    else:
+        return f'Слово "{alt_word_uk}" не знайдено.'
+    print('=======')
 
 
 # Оновлює слова у списку(нім.)
+@input_error
 def update_word_translet_d(word_dict: list = []):
-    try:
-        alt_word_d = input("Введіть старе слово німецькою: ").strip()
-        new_word_d = input("Введіть оновлене слово німецькою: ").strip()
-        found = False
-        for i in word_dict:
-            if i.get('d') == alt_word_d:
-                i.update({'d': new_word_d})
-                found = True
-                break
-        if found:
-            add__member__word(word_dict)  # Зберігаємо оновлений словник у файл
-            return f'Переклад слова {alt_word_d} оновлено на {new_word_d}.'
-        else:
-            return f'Слово "{alt_word_d}" не знайдено.'
-    except Exception as e:
-        print('=======')
-        return e
 
+    alt_word_d = input("Введіть старе слово німецькою: ").strip()
+    new_word_d = input("Введіть оновлене слово німецькою: ").strip()
+    found = False
+    for i in word_dict:
+        if i.get('Deutsch') == alt_word_d:
+            i.update({'Deutsch': new_word_d})
+            found = True
+            break
+    if found:
+        add__member__word(word_dict)  # Зберігаємо оновлений словник у файл
+        return f'Переклад слова {alt_word_d} оновлено на {new_word_d}.'
+    else:
+        return f'Слово "{alt_word_d}" не знайдено.'
+    print('=======')
 
 # Видаляє слово
+@input_error
 def delet_word(word_dict: list = []):
-    try:
-        alt_word = input("Введіть  слово для видалення: ").strip()
-        found = False
-        for i in word_dict:
-            if i.get('d') == alt_word or i.get('uk') == alt_word:
-                word_dict.pop(word_dict.index(i))
 
-                found = True
-                break
+    alt_word = input("Введіть  слово для видалення: ").strip()
+    found = False
+    for i in word_dict:
+        if i.get('Deutsch') == alt_word or i.get('Ukrain') == alt_word:
+            word_dict.pop(word_dict.index(i))
 
-        if found:
-            add__member__word(word_dict)  # Зберігаємо оновлений словник у файл
-            return f'Слова {alt_word} видалено.'
-        else:
-            return f'Слово "{alt_word}" не знайдено.'
-    except Exception as e:
-        print('=======')
-        return e
+            found = True
+            break
+
+    if found:
+        add__member__word(word_dict)  # Зберігаємо оновлений словник у файл
+        return f'Слова {alt_word} видалено.'
+    else:
+        return f'Слово "{alt_word}" не знайдено.'
+    print('=======')
 
 
-# генерує питання для тесту
+
+# Генерує питання для тесту
+@input_error
 def frage(word_dict: list = []):
     random_wariant = []
     war_ant = []
-    try:
 
-        # Генеруємо рандомні значення.(Варіантів відповіді)
-        while len(random_wariant) < 4:
-            num = randint(0, len(word_dict) - 1)
-            if num not in random_wariant:
-                random_wariant.append(num)
-        # Генеруємо рандомні значення. (Варіанти розташування відповідей)
-        random_wariant_c = list(range(4))
-        shuffle(random_wariant_c)
 
-        # Друкуємо питання
-        print(word_dict[random_wariant[1]].get('uk'))
-        frag = word_dict[random_wariant[1]].get('uk')
-        # Друкуємо варіанти відповіді
-        print('=======')
-        for i in range(4):
-            c = random_wariant_c[i]
-            print(word_dict[random_wariant[c]].get('d'), '\t', i)
-            war_ant.append(word_dict[random_wariant[c]].get('uk'))
-        print('=======')
+# Генеруємо рандомні значення.(Варіантів відповіді)
+    while len(random_wariant) < 4:
+        num = randint(0, len(word_dict) - 1)
+        if num not in random_wariant:
+            random_wariant.append(num)
+# Генеруємо рандомні значення. (Варіанти розташування відповідей)
+    random_wariant_c = list(range(4))
+    shuffle(random_wariant_c)
 
-        # Перевіряємо правильність відповіді
-        b = int(input('Введіть відповідь (0, 1, 2, 3): '))
-        if war_ant[b] == frag:  # Перевірка відповіді
-            return '   Правильно\n'
-        else:
-            return '   Неправильно\n'
-    except Exception as e:
-        print('=======')
-        return e
+# Друкуємо питання
+    print(word_dict[random_wariant[1]].get('Ukrain'))
+    frag = word_dict[random_wariant[1]].get('Ukrain')
+# Друкуємо варіанти відповіді
+    print('=======')
+    for i in range(4):
+        c = random_wariant_c[i]
+        print(word_dict[random_wariant[c]].get('Deutsch'), '\t', i)
+        war_ant.append(word_dict[random_wariant[c]].get('Ukrain'))
+    print('=======')
+
+# Перевіряємо правильність відповіді
+    b = int(input('Введіть відповідь (0, 1, 2, 3): '))
+    if war_ant[b] == frag:  # Перевірка відповіді
+        return '+=+ Правильно +=+'
+    else:
+        return '+=+ Неправильно +=+'
+    print('=======')
+
 
 
 def main():
@@ -154,29 +153,29 @@ def main():
         a = input('Введіть kоманду: ').strip()
         print('=======')
 
-        if a == 'close':
+        if a == 'close': # Завершує виконання програми
             print('До побачення :)')
             break
 
-        elif a == 'test':
+        elif a == 'test': # Запускає тест
             print(frage(word_dict))
 
-        elif a == 'add_word':
+        elif a == 'add_word': # Додає слово в список
             print(add_word(word_dict))
 
-        elif a == 'update_word_uk':
+        elif a == 'update_word_uk': # Оновлює значення перекладу
             print(update_word_translet_uk(word_dict))
 
-        elif a == 'update_word_d':
+        elif a == 'update_word_d': # Оновлює значення слова
             print(update_word_translet_d(word_dict))
 
-        elif a == 'delet_word':
+        elif a == 'delet_word': # Видаляє слово
             print(delet_word(word_dict))
 
-        elif a == 'show_all_word':
+        elif a == 'show_all_word': # Виведе всі слова і переклади
             pprint(word_dict)
 
-        else:
+        else: # Команду не знайдено
             print('Команду не знайдено\n')
 
 

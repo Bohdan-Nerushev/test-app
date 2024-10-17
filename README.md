@@ -1,6 +1,6 @@
-* README (English)
+# README (English)
   
-Language Testing Application
+## Language Testing Application##
 This application is a simple tool to test your knowledge of English and German words. It allows you to take quizzes, add new words, update existing ones, and manage your dictionary database.
 
 Features:
@@ -22,9 +22,9 @@ Run the application:
 
 python main.py
 
-* README (German)
+# README (German)
 
-Sprachtest-Anwendung
+## Sprachtest-Anwendung##
 Diese Anwendung ist ein einfaches Tool, um Ihr Wissen über englische und deutsche Wörter zu testen. Es ermöglicht Ihnen, Quizfragen zu beantworten, neue Wörter hinzuzufügen, bestehende zu aktualisieren und Ihre Wörterbuchdatenbank zu verwalten.
 
 Funktionen:
@@ -46,9 +46,9 @@ Starten Sie die Anwendung:
 
 python main.py
 
-* README (Ukrainian)
+# README (Ukrainian)
 
-Додаток для тестування знань мови
+## Додаток для тестування знань мови##
 Цей додаток є простим інструментом для тестування знань англійських та німецьких слів. Він дозволяє проходити тести, додавати нові слова, оновлювати існуючі та керувати базою даних словника.
 
 Можливості:

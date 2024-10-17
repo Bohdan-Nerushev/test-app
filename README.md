@@ -16,11 +16,11 @@ Installation:
 Clone the repository.
 Install dependencies:
 
-pip install -r requirements.txt
+* pip install -r requirements.txt
 
 Run the application:
 
-python main.py
+* python main.py
 
 # README (German)
 
@@ -40,11 +40,11 @@ Installation:
 Klonen Sie das Repository.
 Installieren Sie die Abhängigkeiten:
 
-pip install -r requirements.txt
+* pip install -r requirements.txt
 
 Starten Sie die Anwendung:
 
-python main.py
+* python main.py
 
 # README (Ukrainian)
 
@@ -64,8 +64,8 @@ SQLAlchemy (База даних)
 
 Встановіть залежності:
 
-pip install -r requirements.txt
+* pip install -r requirements.txt
 
 Запустіть додаток:
 
-python main.py
+* python main.py
